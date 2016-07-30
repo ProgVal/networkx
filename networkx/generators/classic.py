@@ -620,7 +620,7 @@ def null_graph(create_using=None):
 
 
 @nodes_or_number(0)
-def path_graph(n, create_using=None):
+def path_graph(n, create_using=None, attrs=None):
     """Return the Path graph `P_n` of linearly connected nodes.
 
     Parameters
@@ -636,7 +636,10 @@ def path_graph(n, create_using=None):
     n_name, nodes = n
     G = empty_graph(nodes, create_using)
     G.name = "path_graph(%s)" % (n_name,)
-    G.add_edges_from(nx.utils.pairwise(nodes))
+    if attrs is None:
+        G.add_edges_from(nx.utils.pairwise(nodes))
+    else:
+        G.add_edges_from((u,v,attrs.copy()) for (u,v) in nx.utils.pairwise(nodes))
     return G
 
 

@@ -391,6 +391,9 @@ class TestGeneratorClassic():
         assert_equal(g.size(), 2)
         assert_true(g.is_directed())
 
+        G=path_graph([1, 2, 3], attrs={'weight': 4})
+        assert_equal(sorted(G.edges(data=True)), [(1,2,{'weight': 4}),(2,3,{'weight': 4})])
+
     def test_periodic_grid_2d_graph(self):
         g=grid_2d_graph(0,0, periodic=True)
         assert_equal(dict(g.degree()), {})
